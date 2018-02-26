@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-#define MAX_LENGTH 12
+#define MAX_LENGTH 15
 #define IN 1
 #define OUT 0
 int main(){
@@ -13,22 +13,20 @@ int main(){
 	}
 	int ch, count = 0;
 	while((ch = getchar()) != EOF){
-		if(ch == '\n' && ch == ' ' && ch == '\t' ){
-			printf("inside if\n");
-			if(state == IN){
+		if(ch == '\n' || ch == ' ' || ch == '\t' ){
+				if(state == IN){
 				state = OUT;
 				word_length[count]++;
-				printf("printing count %d\n",count);
 				count = 0;
 			}
 		}
 		else{
 			if(state == IN){
-				printf("inside else if");	
+				
 				count++;
 			}
 			else{
-				printf("inside else else");
+			
 				state = IN;
 				count = 1;
 			}
@@ -40,9 +38,13 @@ int main(){
 	}
 	
 	for( i = 0; i < MAX_LENGTH + 1 ; i++){
+		printf("length  for %d is %d\n", i, word_length[i]);
+	}
+	
+	for( i = 0; i < MAX_LENGTH + 1 ; i++){
 		putchar('\n');
 		for(j =0 ; j < word_length[i]; j++){
-			putchar('|');
+			putchar('*');
 			putchar(' ');
 		}
 		putchar('\n');
