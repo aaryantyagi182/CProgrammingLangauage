@@ -1,6 +1,8 @@
 #include<stdio.h>
+<<<<<<< HEAD
 #define MAXLINE 1000
 #define MIN_LENGTH 80
+
 
 int getline(char line[], int maxline);
 void copy(char form[], char to[]);
