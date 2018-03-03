@@ -2,15 +2,16 @@
 
 #define MAXLINE 1000
 #define NO_CHARACTER_READ -1
-int getline(char s[], int lim);
+int getLine(char s[], int lim);
 void remove_trailing_blank_space(char line[]);
 int last_char_position(char line[]);
+void append_termination_characters(char line[], int char_end);
 
 int main(){
 
 char line[MAXLINE];
 int lim = 80;
-while(getline(line, lim) > 0){
+while(getLine(line, lim) > 0){
 	remove_trailing_blank_space(line);
 	printf("%s",line);
 }
@@ -18,7 +19,7 @@ return 0;
 }
 
 
-int getline(char s[], int lim){
+int getLine(char s[], int lim){
 	int c, i;
 	for(i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)				
 		s[i] = c;
@@ -33,10 +34,12 @@ int getline(char s[], int lim){
 void remove_trailing_blank_space(char line[]){
 	int i = 0;
 	int char_end = last_char_position(line);
-	line[char_end + 1] = '\0';
+	append_termination_characters(line, char_end);
+	line[char_end + 1] = '\n';
+	line[char_end + 2] = '\0';
 }
 
-/*
+/*i
 * returns the index of last non blank valid ascii character 
 */
 
@@ -46,8 +49,14 @@ int last_char_position(char line[]){
 	int char_end = NO_CHARACTER_READ;
 	int i = 0;
 	for(i = 0; line[i] != '\0'; i++){
-		if(line[i] != '\t' && line[i] != ' ')
+		if(line[i] != '\t' && line[i] != ' ' && line[i] != '\n')
 			char_end = i;
 	}
-	return i;
+        return char_end;
+}
+
+
+void append_termination_characters(char line[], int char_end){
+	line[char_end + 1] = '\n';
+	line[char_end + 2] = '\0';
 }
