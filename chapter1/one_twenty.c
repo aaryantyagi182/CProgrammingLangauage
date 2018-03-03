@@ -40,7 +40,7 @@ int getline(char s[], int lim){
 void detab(char line[], int lim){
 	int i = 0; 
 	int last_char = arr_len(line, lim);
-	for(i = 0; i < lim && line[i] != '\n'; i++){	
+	for(i = 0; i < lim && (line[i] != '\n' || line[i] != '\0'); i++){	
 		if(line[i] == '\t')
 			replace_tab(line, i, last_char, lim);
 	}
@@ -62,7 +62,7 @@ void shift_line(char  line[],int end, int tab, int lim){
 	if(end + TAB_WIDTH - 1 >= lim)
 		return;
 	for( ; end  > tab  ; end--){
-			line[end + TAB_WIDTH] = line[end];
+			line[end + TAB_WIDTH - 1] = line[end];
 	}
 	// Replace tab with black spaces
 	// Move end to the place where to start filling with blank space
