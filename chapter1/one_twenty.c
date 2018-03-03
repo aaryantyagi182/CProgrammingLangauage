@@ -15,7 +15,7 @@ int main() {
   int len = 0;
   while ((len = getline(line, MAXLINE)) > 0) {
     detab(line, MAXLINE);
-    printf("%s\n", line);
+    printf("%s", line);
   }
 }
 
